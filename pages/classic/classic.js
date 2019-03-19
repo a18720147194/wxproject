@@ -3,10 +3,6 @@ import {LikeModel} from '../../models/like.js'
 let classicModel = new ClassicModel()
 let likeModel = new LikeModel()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     classic: null,
     latest: true,
