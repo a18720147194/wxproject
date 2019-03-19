@@ -1,4 +1,5 @@
 import {HTTP} from '../util/http.js'
+import { LikeModel } from './like.js';
 export class ClassicModel extends HTTP{
   getLatest (sCallback) {
     this.request({
@@ -10,12 +11,19 @@ export class ClassicModel extends HTTP{
     })
   }
   getClassic (index, nextOrPre, sCallback) {
-    this.request({
-      url:'classic/'+index+nextOrPre,
-      success:res=>{
-        sCallback(res)
-      }
-    })
+    let key = nextOrPre == 'next' ?this._getKey(index+1):this._getKey(this.index-1)
+    let classic = wx.getStorageSync(key)
+    if(!classic){
+      this.request({
+        url:`classic/${index}/${nextOrPre}`,
+        success:res=>{
+          wx.setStorageSync(this._getKey(res.index),res)
+          sCallback(res)
+        }
+      })
+    }else{
+      sCallback(classic)
+    }
   }
   isFirst (index) {
     return index == 1 ? true : false
@@ -29,4 +37,8 @@ export class ClassicModel extends HTTP{
   _getLatestIndex () {
     return wx.getStorageSync('latest')
   }
+  _getKey (index) {
+    return 'classic'+index
+  }
+  
 }
