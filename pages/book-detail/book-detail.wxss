@@ -69,14 +69,6 @@
     font-size: 22rpx;
     color: #aaa;
 }
-
-/* .comment-container>v-tag:nth-child(1)>view {
-    background-color: #fffbdd;
-}
-
-.comment-container>v-tag:nth-child(2)>view {
-    background-color: #eefbff;
-} */
 .ex-tag1 {
     background-color: #fffbdd !important;
 }
@@ -144,7 +136,7 @@
 }
 
 .posting-container {
-    bottom: 0;
+    bottom: 0rpx;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -152,8 +144,12 @@
     background-color: #fff;
     width: 100%;
     z-index: 999;
+    animation: move 0.6s 
 }
-
+@keyframes move {
+    from {bottom:-300rpx}
+    to {bottom: 0}
+}
 .post-header {
     width: 100%;
     border-bottom: 1px solid #f5f5f5;

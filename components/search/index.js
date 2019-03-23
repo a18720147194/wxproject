@@ -23,7 +23,10 @@ Component({
     more: {
       type: String,
       observer: 'loadMore'
-      // true, true, true,
+    },
+    searchChange:{
+      type:Boolean,
+      observer:'changeSearch'
     }
   },
 
@@ -36,7 +39,9 @@ Component({
     searching: false,
     q: '',
     loading: false,
-    loadingCenter: false
+    loadingCenter: false,
+    header:'header',
+    change:false
   },
 
   attached() {
@@ -50,7 +55,7 @@ Component({
       })
     })
   },
-
+  
   /**
    * 组件的方法列表
    */
@@ -73,7 +78,6 @@ Component({
           })
       }
     },
-
     onCancel() {
       this.initialize()
       this.triggerEvent('cancel', {}, {})
@@ -99,6 +103,22 @@ Component({
           keywordModel.addToHistory(q)
           this._hideLoadingCenter()
         })
+    },
+    changeSearch () {
+      if(this.properties.searchChange){
+        if(this.data.header !== 'header ScrollSmall'){
+          this.setData({
+            header:'header ScrollSmall',
+            change:true
+          })
+        }
+      }else{
+        if(this.data.header !== 'header ScrollBig' && this.data.change){
+          this.setData({
+            header:'header ScrollBig'
+          })
+        }
+      }
     },
 
     _showLoadingCenter() {

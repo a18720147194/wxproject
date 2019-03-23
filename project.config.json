@@ -41,9 +41,9 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "my",
-					"pathName": "pages/my/my",
-					"query": "bid=1120",
+					"name": "book",
+					"pathName": "pages/book-detail/book-detail",
+					"query": "bid=7",
 					"scene": null
 				}
 			]

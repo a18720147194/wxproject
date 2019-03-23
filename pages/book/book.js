@@ -1,10 +1,13 @@
 import {BookModel} from '../../models/book'
 const bookModel = new BookModel()
+
 Page({
   data: {
     books:[],
     seraching:false,
-    more:false
+    more:false,
+    header:"header",
+    change:false
   },
   onLoad: function (options) {
     bookModel.getHotList()
@@ -29,5 +32,22 @@ Page({
     this.setData({
       more:!this.data.more
     })
+  },
+  onPageScroll(e){
+    if(e.scrollTop>=80){
+      if(this.data.header !== 'header ScrollSmall'){
+        this.setData({
+          header:'header ScrollSmall',
+          change:true
+        })
+      }
+    }else{
+      if(this.data.header !== 'header ScrollBig' && this.data.change){
+        this.setData({
+          header:'header ScrollBig',
+          change:false
+        })
+      }
+    }
   }
 })
