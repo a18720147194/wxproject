@@ -1,0 +1,2 @@
+<!--pages/about/about.wxml-->
+<image class='me' src="/images/aboutMe.png" />
